@@ -1,0 +1,22 @@
+{
+  "name": "lendsqr-be-test",
+  "version": "1.0.0",
+  "description": "mvp wallet service",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node --exec ts-node index.ts",
+    "dev": "nodemon --exec ts-node index.ts"
+  },
+  "author": "oluwaseun",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2"
+  }
+}
