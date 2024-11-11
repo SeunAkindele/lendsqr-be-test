@@ -1,9 +1,8 @@
 {
-    "compilerOptions": {
-      "module": "ESNext",  // or "ES6"
-      "esModuleInterop": true,  // Allows default imports for CommonJS modules
-      "moduleResolution": "node",  // Resolves module paths like in Node.js
-      "target": "ES6",  // Set the ECMAScript version for the output
-    }
+  "compilerOptions": {
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "target": "ES6",
   }
-  
+}

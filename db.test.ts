@@ -1,4 +1,4 @@
-const knexfile = require('./knexfile');
+const knexfile = require('./src/knexfile');
 jest.mock('knexfile');
 
 describe('Database Connection', () => {
@@ -21,7 +21,7 @@ describe('Database Connection', () => {
     const mockKnexInstance = { connect: jest.fn((cb) => cb(new Error('Connection failed'))) };
     knex.createConnection.mockReturnValue(mockKnexInstance);
 
-    const db = require('./knexfile');
+    const db = require('./src/knexfile');
 
     console.error = jest.fn();
     db;
@@ -34,7 +34,7 @@ describe('Database Connection', () => {
     const mockKnexInstance = { connect: jest.fn((cb) => cb(null)) };
     knex.createConnection.mockReturnValue(mockKnexInstance);
 
-    const db = require('./knexfile');
+    const db = require('./src/knexfile');
 
     console.log = jest.fn();
     db;
