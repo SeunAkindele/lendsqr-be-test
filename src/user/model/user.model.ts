@@ -1,10 +1,10 @@
+const knex = require('../../knexfile');
 
 export interface User {
-    id?:number;
     name: string;
     email: string;
     password: string;
-    is_blacklist: number;
+    is_blacklist?: boolean;
     status?:number;
     created_at: Date;
     updated_at: Date;

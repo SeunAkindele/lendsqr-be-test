@@ -6,7 +6,7 @@ export default class UserService {
     constructor() {
         this.userModel = new UserModel();
     }
-
+ 
     async create(userData: User): Promise<User> {
         try {
             return await this.userModel.create(userData);

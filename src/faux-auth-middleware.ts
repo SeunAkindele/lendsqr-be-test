@@ -1,14 +1,12 @@
+// src/faux-auth-middleware.ts
 import { Request, Response, NextFunction } from 'express';
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-export const fauxAuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export function fauxAuthMiddleware(req: Request, res: Response, next: NextFunction): void {
   const token = req.headers['authorization'];
-
+  
   if (token && token === `Bearer ${process.env.FAUX_TOKEN}`) {
-    next();
+    next(); // Proceed to the next middleware or route handler
   } else {
-    return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    res.status(401).json({ message: 'Unauthorized: Invalid token' });
   }
 }

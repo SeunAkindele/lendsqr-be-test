@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import UserService from './../service/user.service';
+import UserService from '../service/user.service';
 import { fauxAuthMiddleware } from '../../faux-auth-middleware';
 
 const userService = new UserService();
@@ -15,7 +15,7 @@ router.post('/', async (req: Request, res: Response) => {
     }
 });
 
-router.get('/', async (req: Request, res: Response) => {
+router.get('/', fauxAuthMiddleware, async (req: Request, res: Response) => {
     try{
         const users = await userService.findAll();
         res.status(201).json(users);
