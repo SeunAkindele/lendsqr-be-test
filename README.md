@@ -1,5 +1,3 @@
-# lendsqr-be-test
-
 # MVP Wallet Service
 
 A simple wallet service API that allows users to create accounts, deposit funds, transfer funds, and withdraw funds. This project is being built as part of an MVP to demonstrate basic wallet functionality.
