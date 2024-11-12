@@ -31,5 +31,5 @@ export default class UserService {
 
     async findByEmail(email: string): Promise<User | undefined> {
         return await this.userModel.findByEmail(email);
-      }
+    }
 }

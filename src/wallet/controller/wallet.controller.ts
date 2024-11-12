@@ -18,7 +18,7 @@ router.post('/', fauxAuthMiddleware, async (req: Request, res: Response) => {
 router.get('/', fauxAuthMiddleware, async (req: Request, res: Response) => {
     try{
         const users = await walletService.findAll();
-        res.status(201).json(users);
+        res.status(200).json(users);
     }catch (error) {
         console.error('Error fetching wallets:', error);
         res.status(500).json({ error: 'Failed to fetch wallets' });
