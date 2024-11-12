@@ -36,7 +36,7 @@ export default class TransactionService {
         return wallet;
     }
 
-    async validateWithdrawal(id, amount,  trx) {
+    async validateBalance(id, amount,  trx) {
         let wallet = await this.walletModel.findByUserId(id, trx);
         if (wallet.balance < amount) {
             throw new Error("Wallet has insufficient funds");
@@ -51,7 +51,7 @@ export default class TransactionService {
             let wallet = await this.validateWallet(recipient_id, trx, "Wallet not found");
 
             if(transaction_type === "withdrawal"){
-                await this.validateWithdrawal(recipient_id, amount, trx);
+                await this.validateBalance(recipient_id, amount, trx);
             }
 
             const token = await this.transactionId();
@@ -81,7 +81,7 @@ export default class TransactionService {
         const {sender_id, amount} = transactionData;
 
         const wallet = await this.validateWallet(sender_id, trx, "Wallet not found");
-        await this.validateWithdrawal(sender_id, amount, trx);
+        await this.validateBalance(sender_id, amount, trx);
 
         const token = await this.transactionId();
         const transaction = await this.transactionModel.create({...transactionData, token, effect: 'dr'}, trx);
