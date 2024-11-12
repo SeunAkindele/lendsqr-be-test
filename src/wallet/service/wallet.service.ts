@@ -1,4 +1,5 @@
 import WalletModel, { Wallet } from "../model/wallet.model";
+const knex = require('../../knexfile');
 
 export default class WalletService {
     private walletModel: WalletModel;
@@ -8,8 +9,9 @@ export default class WalletService {
     }
  
     async create(walletData: Wallet): Promise<Wallet | string> {
+        const trx = await knex.transaction();
         try {
-            const wallet = await this.findByUserId(walletData.user_id);
+            const wallet = await this.findByUserId(walletData.user_id, trx);
             if(wallet) {
                 return 'You already created a wallet with this account.';
             }
@@ -29,13 +31,13 @@ export default class WalletService {
         }
     }
 
-    async findByUserId(id: number): Promise<Wallet | undefined> {
-        return await this.walletModel.findByUserId(id);
+    async findByUserId(id: number, trx): Promise<Wallet | undefined> {
+        return await this.walletModel.findByUserId(id, trx);
     }
 
-    async update(id: number, walletData: Wallet): Promise<Wallet> {
+    async update(id: number, walletData: Wallet, trx): Promise<Wallet> {
         try {
-            return await this.walletModel.update(id, walletData);
+            return await this.walletModel.update(id, walletData, trx);
         } catch(error) {
             console.error("Error updating wallet: ", error);
             throw error;
