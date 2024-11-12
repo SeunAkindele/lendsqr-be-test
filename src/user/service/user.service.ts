@@ -7,8 +7,12 @@ export default class UserService {
         this.userModel = new UserModel();
     }
  
-    async create(userData: User): Promise<User> {
+    async create(userData: User): Promise<User | string> {
         try {
+            const user = await this.findByEmail(userData.email);
+            if(user) {
+                return 'This email already exist';
+            }
             return await this.userModel.create(userData);
         } catch(error) {
             console.error("Error creating user: ", error);
@@ -24,4 +28,8 @@ export default class UserService {
             throw error;
         }
     }
+
+    async findByEmail(email: string): Promise<User | undefined> {
+        return await this.userModel.findByEmail(email);
+      }
 }

@@ -21,6 +21,10 @@ export default class UserModel {
     return await knex(this.table).where({ id }).first();
   }
 
+  async findByEmail(email: string): Promise<User | undefined> {
+    return await knex(this.table).where({ email }).first();
+  }
+
   async create(user: User): Promise<User> {
     // Insert the record and get the inserted ID
     const [insertedId] = await knex(this.table).insert(user);
