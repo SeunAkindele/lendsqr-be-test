@@ -1,5 +1,5 @@
 const knexfile = require('./src/knexfile');
-jest.mock('knexfile');
+jest.mock('./src/knexfile');
 
 describe('Database Connection', () => {
   it('should call knex with correct parameters', () => {
