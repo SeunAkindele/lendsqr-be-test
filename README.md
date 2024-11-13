@@ -102,7 +102,7 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
       }'
 ```
 
-- **POST** `/api/transactions/deposit-withdrawal` - Transfer funds to another user's wallet
+- **POST** `/api/transactions/transfer` - Transfer funds to another user's wallet
 `cURL` command:
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions/transfer \
