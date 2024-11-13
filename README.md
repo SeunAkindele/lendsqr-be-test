@@ -42,10 +42,9 @@ https://oluwaseun-lendsqr-be-test.heroku.com
 curl -X POST https://oluwaseun-lendsqr-be-test.heroku.com/users \
 -H "Content-Type: application/json" \
 -d '{
-      "name": "John Doe",
-      "email": "johndoe@example.com",
-      "password": "securepassword",
-      "role": "user"
+      "name": "newuser",
+      "email": "newuser@gmail.com",
+      "password": "password"
     }'
 ```
 
