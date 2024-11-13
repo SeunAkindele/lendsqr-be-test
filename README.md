@@ -14,6 +14,12 @@ A simple wallet service API that allows users to create accounts, deposit funds,
 - KnexJS ORM
 - TypeScript
 
+## Database Design
+
+### Entity-Relationship Diagram
+
+![Entity-Relationship Diagram](src/er-diagram.png)
+
 ## Accessing the API Endpoints:
 
 Base URL
