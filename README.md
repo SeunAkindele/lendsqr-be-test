@@ -55,7 +55,7 @@ curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/wal
 - **POST** `/api/wallets` - Creates wallet for user
 `cURL` command:
 ```bash
-curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/users \
+curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/wallets \
   -H "Authorization: Bearer faux-token-1234567890" \
   -H "Content-Type: application/json" \
   -d '{
