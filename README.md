@@ -15,5 +15,7 @@ A simple wallet service API that allows users to create accounts, deposit funds,
 - TypeScript
 
 ## Accessing the API:
+
 Base URL
+
 https://oluwaseun-lendsqr-be-test.heroku.com
