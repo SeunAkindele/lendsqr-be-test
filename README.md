@@ -16,7 +16,7 @@ A simple wallet service API that allows users to create accounts, deposit funds,
 
 ## Database Design
 
-### Entity-Relationship Diagram
+Entity-Relationship Diagram
 
 ![Entity-Relationship Diagram](src/er-diagram.png)
 
