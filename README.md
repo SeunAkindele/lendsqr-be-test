@@ -66,7 +66,7 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/wa
 ```
 
 ### Transaction
-- **GET** `/api/wallets` - Retrieve transaction history
+- **GET** `/api/transactions` - Retrieve transaction history
 `cURL` command:
 ```bash
 curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
@@ -74,10 +74,10 @@ curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tra
 -H "Content-Type: application/json"
 ```
 
-- **POST** `/api/deposit-withdrawal` - Funds wallet
+- **POST** `/api/transactions/deposit-withdrawal` - Funds wallet
 `cURL` command:
 ```bash
-curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
+curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions/deposit-withdrawal \
   -H "Authorization: Bearer faux-token-1234567890" \
   -H "Content-Type: application/json" \
   -d '{
@@ -88,10 +88,10 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
       }'
 ```
 
-- **POST** `/api/deposit-withdrawal` - Withdraws from wallet
+- **POST** `/api/transactions/deposit-withdrawal` - Withdraws from wallet
 `cURL` command:
 ```bash
-curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
+curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions/deposit-withdrawal \
   -H "Authorization: Bearer faux-token-1234567890" \
   -H "Content-Type: application/json" \
   -d '{
@@ -102,10 +102,10 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
       }'
 ```
 
-- **POST** `/api/deposit-withdrawal` - Transfer funds to another user's wallet
+- **POST** `/api/transactions/deposit-withdrawal` - Transfer funds to another user's wallet
 `cURL` command:
 ```bash
-curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
+curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions/transfer \
   -H "Authorization: Bearer faux-token-1234567890" \
   -H "Content-Type: application/json" \
   -d '{
