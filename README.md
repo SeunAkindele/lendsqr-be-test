@@ -22,7 +22,7 @@ https://oluwaseun-lendsqr-be-test.heroku.com
 
 User
 
-- GET /users
+- **GET** `/users` - Retrieve all users
 - POST /users
 
 Wallet
