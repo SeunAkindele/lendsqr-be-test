@@ -37,17 +37,17 @@ export default class UserService {
     async create(userData: User): Promise<{user: User, token: string} | string> {
         try {
             // checking if user is blacklisted
-            // const isUserBlacklisted = await this.checkBlacklist(userData.email);
-            // if(isUserBlacklisted) {
-            //     return `This user is in the Lendsqr Adjutor Karma blacklist and cannot onboard`;
-            // }
+            const isUserBlacklisted = await this.checkBlacklist(userData.email);
+            if(isUserBlacklisted) {
+                return `This user is in the Lendsqr Adjutor Karma blacklist and cannot onboard`;
+            }
             
             const user = await this.findByEmail(userData.email);
             if(user) {
                 return 'This email already exist';
             }
             const newUser = await this.userModel.create(userData);
-            return {user: newUser, token: 'faux-token-1234567890!'};
+            return {user: newUser, token: 'faux-token-1234567890'};
         } catch(error) {
             console.error("Error creating user: ", error);
             throw error;
