@@ -22,7 +22,7 @@ Entity-Relationship Diagram
 
 ## Accessing the API Endpoints:
 
-- **Base URL** `https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com`
+**Base URL** `https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com`
 
 ### User
 - **GET** `/api/users` - Retrieve all users
