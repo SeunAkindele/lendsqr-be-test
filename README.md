@@ -36,12 +36,13 @@ curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/use
 `cURL` command:
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/users \
--H "Authoriztion: faux-token-1234567890" \
--d '{
-      "name": "newuser",
-      "email": "newuser@gmail.com",
-      "password": "newuserpassword"
-    }'
+  -H "Authorization: Bearer faux-token-1234567890" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "name": "newuser",
+        "email": "newuser@gmail.com",
+        "password": "newuserpassword"
+      }'
 ```
 
 ### Wallet
