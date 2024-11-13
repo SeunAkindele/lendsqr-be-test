@@ -22,24 +22,20 @@ Entity-Relationship Diagram
 
 ## Accessing the API Endpoints:
 
-Base URL
-
-https://oluwaseun-lendsqr-be-test.heroku.com
+- **Base URL** `https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com`
 
 ### User
 - **GET** `/api/users` - Retrieve all users
-- **POST** `/api/users` - Registers all users provided they are not blacklisted
-<!-- - Body: -->
-<!-- ```json
-{
-  "name": "newuser",
-  "email": "newuser@gmail.com",
-  "password": "password"
-}
-``` -->
 `cURL` command:
 ```bash
-curl -X POST https://oluwaseun-lendsqr-be-test.heroku.com/users \
+curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/users \
+-H "Content-Type: application/json"
+```
+
+- **POST** `/api/users` - Registers all users provided they are not blacklisted
+`cURL` command:
+```bash
+curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/users \
 -H "Content-Type: application/json" \
 -d '{
       "name": "newuser",
