@@ -14,9 +14,6 @@ A simple wallet service API that allows users to create accounts, deposit funds,
 - KnexJS ORM
 - TypeScript
 
-## Setup Instructions:
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/SeunAkindele/lendsqr-be-test.git
-   cd lendsqr-be-test
-   npm install
+## Accessing the API:
+# Base URL
+https://oluwaseun-lendsqr-be-test.heroku.com
