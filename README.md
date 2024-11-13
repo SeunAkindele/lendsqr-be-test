@@ -36,16 +36,21 @@ curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/use
 `cURL` command:
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/users \
--H "Content-Type: application/json" \
+-H "Authoriztion: faux-token-1234567890" \
 -d '{
       "name": "newuser",
       "email": "newuser@gmail.com",
-      "password": "password"
+      "password": "newuserpassword"
     }'
 ```
 
 ### Wallet
-- GET /wallets
+- **GET** `/api/wallets` - Retrieve all wallets
+`cURL` command:
+```bash
+curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/wallets \
+-H "Content-Type: application/json"
+```
 - POST /wallets
 
 ### Transaction
