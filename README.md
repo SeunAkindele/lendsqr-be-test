@@ -36,3 +36,5 @@ Transaction
 - POST /deposit-withdrawal
 
 ## Testing
+```bash
+   npm test
