@@ -32,9 +32,9 @@ https://oluwaseun-lendsqr-be-test.heroku.com
   "email": "newuser@gmail.com",
   "password": "password"
 }
+```
 
-
-Wallet
+### Wallet
 
 - GET /wallets
 - POST /wallets
