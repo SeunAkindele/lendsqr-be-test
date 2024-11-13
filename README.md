@@ -27,8 +27,8 @@ Base URL
 https://oluwaseun-lendsqr-be-test.heroku.com
 
 ### User
-- **GET** `/users` - Retrieve all users
-- **POST** `/users` - Registers all users provided they are not blacklisted
+- **GET** `/api/users` - Retrieve all users
+- **POST** `/api/users` - Registers all users provided they are not blacklisted
 <!-- - Body: -->
 <!-- ```json
 {
