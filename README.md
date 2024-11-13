@@ -115,7 +115,3 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
          "transaction_type": "transfer"
       }'
 ```
-
-## Testing
-```bash
-   npm test
