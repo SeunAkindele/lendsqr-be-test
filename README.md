@@ -1,6 +1,6 @@
 # MVP Wallet Service
 
-A simple wallet service API that allows users to create accounts, deposit funds, transfer funds, and withdraw funds. This project is being built as part of an MVP to demonstrate basic wallet functionality.
+A simple wallet service API that allows users to create accounts, deposit funds, transfer funds, and withdraw funds. This project is being built as an MVP to demonstrate basic wallet functionality. A blacklist check to prevent blacklisted users was also implemeted through integration with external services.
 
 ## Features:
 - User account creation
@@ -66,8 +66,55 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/wa
 ```
 
 ### Transaction
-- GET /transactions
-- POST /deposit-withdrawal
+- **GET** `/api/wallets` - Retrieve transaction history
+`cURL` command:
+```bash
+curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
+-H "Authorization: Bearer faux-token-1234567890" \
+-H "Content-Type: application/json"
+```
+
+- **POST** `/api/deposit-withdrawal` - Funds wallet
+`cURL` command:
+```bash
+curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
+  -H "Authorization: Bearer faux-token-1234567890" \
+  -H "Content-Type: application/json" \
+  -d '{
+         "recipient_id": 1,
+         "amount": 2500,
+         "transaction_type": "deposit",
+         "effect": "cr"
+      }'
+```
+
+- **POST** `/api/deposit-withdrawal` - Withdraws from wallet
+`cURL` command:
+```bash
+curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
+  -H "Authorization: Bearer faux-token-1234567890" \
+  -H "Content-Type: application/json" \
+  -d '{
+         "recipient_id": 1,
+         "amount": 2000,
+         "transaction_type": "withdrawal",
+         "effect": "dr"
+      }'
+```
+
+- **POST** `/api/deposit-withdrawal` - Transfer funds to another user's wallet
+`cURL` command:
+```bash
+curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
+  -H "Authorization: Bearer faux-token-1234567890" \
+  -H "Content-Type: application/json" \
+  -d '{
+         "sender_id": 1,
+         "recipient_id": 2,
+         "amount": 3000,
+         "transaction_type": "transfer"
+      }'
+```
 
 ## Testing
 ```bash
