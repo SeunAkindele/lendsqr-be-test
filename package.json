@@ -2,9 +2,9 @@
   "name": "lendsqr-be-test",
   "version": "1.0.0",
   "description": "mvp wallet service",
-  "main": "src/server.js",
+  "main": "build/server.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node build/server.js",
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
     "test": "jest"

@@ -2,16 +2,16 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    // "module": "commonjs",
+    "module": "commonjs",
     "outDir": "./build",
     "rootDir": "./src",
     "strict": false,
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "baseUrl": "./", // Optional, helps with relative imports if needed
+    "baseUrl": "./",
     "paths": {
-      "*": ["src/*"] // Map imports to the "src" folder
+      "*": ["src/*"]
     }
     // "skipLibCheck": true
   },
