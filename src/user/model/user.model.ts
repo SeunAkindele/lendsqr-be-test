@@ -13,6 +13,8 @@ export interface User {
 export default class UserModel {
   private table = 'users';
 
+  constructor() {}
+
   async findAll(): Promise<User[]> {
     return await knex(this.table).select('*');
   }
