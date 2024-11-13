@@ -14,8 +14,25 @@ A simple wallet service API that allows users to create accounts, deposit funds,
 - KnexJS ORM
 - TypeScript
 
-## Accessing the API:
+## Accessing the API Endpoints:
 
 Base URL
 
 https://oluwaseun-lendsqr-be-test.heroku.com
+
+User
+
+- GET /users
+- POST /users
+
+Wallet
+
+- GET /wallets
+- POST /wallets
+
+Transaction
+
+- GET /transactions
+- POST /deposit-withdrawal
+
+## Testing
