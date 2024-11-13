@@ -30,12 +30,16 @@ https://oluwaseun-lendsqr-be-test.heroku.com
 - **GET** `/users` - Retrieve all users
 - **POST** `/users` - Registers all users provided they are not blacklisted
 - Body:
+
 ```json
-{
-  "name": "newuser",
-  "email": "newuser@gmail.com",
-  "password": "password"
-}
+curl -X POST https://oluwaseun-lendsqr-be-test.heroku.com
+-H "Content-Type: application/json" \
+-d '{
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "password": "securepassword",
+      "role": "user"
+    }'
 ```
 
 ### Wallet
