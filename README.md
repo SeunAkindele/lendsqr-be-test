@@ -97,8 +97,7 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
   -d '{
          "recipient_id": 1,
          "amount": 2500,
-         "transaction_type": "deposit",
-         "effect": "cr"
+         "transaction_type": "deposit"
       }'
 ```
 
@@ -112,8 +111,7 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
   -d '{
          "recipient_id": 1,
          "amount": 2000,
-         "transaction_type": "withdrawal",
-         "effect": "dr"
+         "transaction_type": "withdrawal"
       }'
 ```
 
