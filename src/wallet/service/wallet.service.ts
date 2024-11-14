@@ -20,7 +20,7 @@ export default class WalletService {
         try {
             const user = await this.userModel.findById(walletData.user_id);
             if(!user) {
-                throw new BadRequestError('This accout does not exist.');
+                throw new BadRequestError('This account does not exist.');
             }
             const wallet = await this.findByUserId(walletData.user_id, trx);
             if(wallet) {
