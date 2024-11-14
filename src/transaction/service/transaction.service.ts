@@ -89,7 +89,10 @@ export default class TransactionService {
             const newTransaction = await this.transactionModel.create({
                 ...transactionData, 
                 token,
-                effect: transaction_type === "withdrawal" ? 'dr' : 'cr'
+                effect: 
+                    transaction_type === "withdrawal" ? 
+                    'dr' : 
+                    'cr'
             }, trx);
             
             // Checks if transaction type is deposit or withdrawal and gets wallet balance
