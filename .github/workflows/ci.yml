@@ -1,28 +1,28 @@
-name: Heroku Deployment CI  # Name of the workflow
+name: Heroku Deployment CI  # Specifies the name of the workflow
 
-on:
-  push:
-    branches:
-      - main  # Trigger workflow on push to 'main' branch
-  pull_request:
-    branches:
-      - main  # Trigger workflow on pull request to 'main' branch
+on:  # Defines events that trigger the workflow
+  push:  # Triggers the workflow when code is pushed
+    branches:  # Specifies which branches to watch
+      - main  # Run workflow on push to the 'main' branch
+  pull_request:  # Triggers the workflow on pull requests
+    branches:  # Specifies which branches to watch
+      - main  # Run workflow on pull request to the 'main' branch
 
-jobs:
-  build:
-    runs-on: ubuntu-latest  # Run the job on the latest Ubuntu environment
+jobs:  # Defines the jobs that will be executed in this workflow
+  build:  # Defines a job named 'build'
+    runs-on: ubuntu-latest  # The job will run on the latest Ubuntu environment
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3  # Checkout the repository code
+    steps:  # List of steps to execute in the 'build' job
+      - name: Checkout repository  # Step to checkout the repository
+        uses: actions/checkout@v3  # Uses the checkout action to clone the repository
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3  # Set up Node.js environment
+      - name: Set up Node.js  # Step to set up the Node.js environment
+        uses: actions/setup-node@v3  # Uses the setup-node action to configure Node.js
         with:
-          node-version: '18'  # Use Node.js version 18
+          node-version: '18'  # Specifies Node.js version 18 to use
 
-      - name: Install dependencies
-        run: npm install  # Install project dependencies
+      - name: Install dependencies  # Step to install project dependencies
+        run: npm install  # Runs 'npm install' to install required Node.js packages
 
-      - name: Run tests
-        run: npm test  # Run the test suite
+      - name: Run tests  # Step to run the test suite
+        run: npm test  # Runs 'npm test' to execute the automated tests
