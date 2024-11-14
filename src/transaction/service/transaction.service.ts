@@ -43,9 +43,31 @@ export default class TransactionService {
         }
         return true;
     }
+
+    // Input validation
+    async validateInput(transactionData): Promise<void> {
+        // Check if transaction type is provided
+        if (!transactionData.transaction_type) {
+            throw new Error('Transaction type not provided');
+        }
+
+        // Validate transfer-specific fields
+        if (transactionData.transaction_type === "transfer") {
+            if (!transactionData.sender_id || !transactionData.recipient_id || !transactionData.amount) {
+                throw new Error('All fields (sender, recipient, amount, effect) must be filled for transfer');
+            }
+        } else {
+            // Validate other transaction types (e.g., deposit/withdrawal)
+            if (!transactionData.recipient_id || !transactionData.amount || !transactionData.effect) {
+                throw new Error('All fields (recipient, amount, effect) must be filled for this transaction');
+            }
+        }
+    }
  
     async transact(transactionData: Transaction): Promise<Transaction> {
+        await this.validateInput(transactionData);
         const {transaction_type, amount, recipient_id} = transactionData;
+        
         const trx = await knex.transaction();
         try {
             let wallet = await this.validateWallet(recipient_id, trx, "Wallet not found");
@@ -107,6 +129,7 @@ export default class TransactionService {
     }
 
     async transfer(transactionData: Transaction): Promise<Transaction | string> {
+        await this.validateInput(transactionData);
         const trx = await knex.transaction();
         try {
             

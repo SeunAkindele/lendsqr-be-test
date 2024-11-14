@@ -12,9 +12,18 @@ export interface Transaction {
 
 export default class TransactionModel {
   private table = 'transactions';
+  private users = 'users';
 
   async findAll(): Promise<Transaction[]> {
-    return await knex(this.table).select('*');
+    return await knex(this.table)
+            .select(
+              `${this.table}.*`,                    // Select all transaction columns
+                'sender.name as sender',           // Sender's name (if exists)
+                'recipient.name as recipient'      // Recipient's name
+            )
+            .leftJoin(`${this.users} as sender`, `${this.table}.sender_id`, '=', 'sender.id')  // Left join for sender_id (may be null)
+            .join(`${this.users} as recipient`, `${this.table}.recipient_id`, '=', 'recipient.id');  // Join for recipient_id (never null)
+   
   }
 
   async findById(id: number): Promise<Transaction | undefined> {

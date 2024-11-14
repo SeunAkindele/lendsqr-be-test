@@ -9,9 +9,12 @@ export interface Wallet {
 
 export default class WalletModel {
   private table = 'wallets';
+  private users = 'users';
 
   async findAll(): Promise<Wallet[]> {
-    return await knex(this.table).select('*');
+    return await knex(this.table)
+            .select(`${this.table}.*`, `${this.users}.name as name`)  // Select all wallet columns + the owner's name
+            .join(this.users, `${this.table}.user_id`, '=', `${this.users}.id`);
   }
 
   async findById(id: number): Promise<Wallet | undefined> {

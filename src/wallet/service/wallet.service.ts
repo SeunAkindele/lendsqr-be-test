@@ -9,6 +9,9 @@ export default class WalletService {
     }
  
     async create(walletData: Wallet): Promise<Wallet | string> {
+        if (!walletData.user_id) {
+            return 'No user account was provideds';
+        }
         const trx = await knex.transaction();
         try {
             const wallet = await this.findByUserId(walletData.user_id, trx);

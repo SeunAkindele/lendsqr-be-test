@@ -1,4 +1,4 @@
-# MVP Wallet Service
+# Lendsqr be test MVP Wallet Service
 
 A simple wallet service API that allows users to create accounts, deposit funds, transfer funds, and withdraw funds. This project is being built as an MVP to demonstrate basic wallet functionality. A blacklist check to prevent blacklisted users was also implemeted through integration with external services.
 
@@ -120,7 +120,7 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
       }'
 ```
 
-### Test
+## Test
 ```bash
 npm run test
 ```
