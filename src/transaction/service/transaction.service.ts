@@ -115,47 +115,35 @@ export default class TransactionService {
         }
     }
 
-    async debitSender(transactionData, trx) {
-        const {sender_id, amount} = transactionData;
+    async processTransaction(transactionData, user_id, effect, token, trx) {
+        const {amount} = transactionData;
 
-        const wallet = await this.validateWallet(sender_id, trx, "Wallet not found");
-        await this.validateBalance(sender_id, amount, trx);
-
-        const token = await this.transactionId();
-        const transaction = await this.transactionModel.create({...transactionData, token, effect: 'dr'}, trx);
+        const wallet = await this.validateWallet(user_id, trx, `${effect === 'cr' && 'Reciepient'} wallet not found`);
+        await this.validateBalance(user_id, amount, trx);
+        
+        const transaction = await this.transactionModel.create({...transactionData, token, effect}, trx);
 
         const updated_at = new Date();
         const walletBalance = Number(wallet.balance) - Number(transaction.amount);
-        await this.walletModel.update(sender_id, {balance: walletBalance, updated_at }, trx);
+        await this.walletModel.update(user_id, {balance: walletBalance, updated_at }, trx);
 
-        return transaction;
-    }
-
-    async creditRecipient(transactionData, trx) {
-        const {recipient_id} = transactionData;
-
-        const wallet = await this.validateWallet(recipient_id, trx, "Recipient wallet not found");
-
-        const token = await this.transactionId();
-        const transaction = await this.transactionModel.create({...transactionData, token, effect: 'cr'}, trx);
-
-        const updated_at = new Date();
-        const walletBalance = Number(wallet.balance) + Number(transaction.amount);
-        await this.walletModel.update(recipient_id, {balance: walletBalance, updated_at }, trx);
-    }
+        if(effect === 'dr'){
+            return  transaction;
+        }
+    } 
 
     async transfer(transactionData: Transaction): Promise<Transaction | string> {
         await this.validateInput(transactionData);
         const trx = await knex.transaction();
         try {
-            
+            const token = await this.transactionId();
             // processes sender transaction
-            const transaction = await this.debitSender(transactionData, trx);
+            const transaction = await this.processTransaction(transactionData, transactionData.sender_id, 'dr', token, trx);
 
             // throw new Error("Simulated error before wallet update to check if rollback works");
 
             // processes recipient transaction
-            await this.creditRecipient(transactionData, trx);
+            await this.processTransaction(transactionData, transactionData.recipient_id, 'cr', token, trx);
 
             // throw new Error("Simulated error before wallet update to check if rollback works");
             
