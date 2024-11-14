@@ -59,12 +59,12 @@ export default class TransactionService {
         // Validate transfer-specific fields
         if (transactionData.transaction_type === "transfer") {
             if (!transactionData.sender_id || !transactionData.recipient_id || !transactionData.amount) {
-                throw new BadRequestError('All fields (sender, recipient, amount, effect) must be filled for transfer');
+                throw new BadRequestError('All fields (sender, recipient, amount) must be filled for transfer');
             }
         } else {
             // Validate other transaction types (e.g., deposit/withdrawal)
             if (!transactionData.recipient_id || !transactionData.amount) {
-                throw new BadRequestError('All fields (recipient, amount, effect) must be filled for this transaction');
+                throw new BadRequestError('All fields (recipient, amount) must be filled for this transaction');
             }
         }
     }

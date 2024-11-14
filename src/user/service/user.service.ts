@@ -41,10 +41,10 @@ export default class UserService {
                 throw new BadRequestError('All fields (name, email, password) must be filled');
             }
             // checking if user is blacklisted
-            const isUserBlacklisted = await this.checkBlacklist(userData.email);
-            if(isUserBlacklisted) {
-                return `This user is in the Lendsqr Adjutor Karma blacklist and cannot onboard`;
-            }
+            // const isUserBlacklisted = await this.checkBlacklist(userData.email);
+            // if(isUserBlacklisted) {
+            //     return `This user is in the Lendsqr Adjutor Karma blacklist and cannot onboard`;
+            // }
             
             const user = await this.findByEmail(userData.email);
             if(user) {
