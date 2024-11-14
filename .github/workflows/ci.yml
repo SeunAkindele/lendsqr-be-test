@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Heroku Deployment CI
 
 on:
   push:
