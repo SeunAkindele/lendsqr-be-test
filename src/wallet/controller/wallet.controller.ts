@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import WalletService from '../service/wallet.service';
 import { fauxAuthMiddleware } from '../../faux-auth-middleware';
+import { BadRequestError } from '../../error/bad-request';
 
 const walletService = new WalletService();
 const router = Router();
@@ -10,8 +11,12 @@ router.post('/', fauxAuthMiddleware, async (req: Request, res: Response) => {
         const user = await walletService.create(req.body);
         res.status(201).json(user);
     } catch (error) {
-        console.error('Error creating wallet:', error);
-        res.status(500).json({ error: 'Failed to create wallet' });
+        if (error instanceof BadRequestError) {
+            res.status(error.statusCode).json({ error: error.message });
+        } else {
+            console.error('Error creating wallet:', error);
+            res.status(500).json({ error: 'Failed to create wallet' });
+        }
     }
 });
 

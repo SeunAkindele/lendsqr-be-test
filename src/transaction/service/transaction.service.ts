@@ -1,3 +1,4 @@
+import { BadRequestError } from "../../error/bad-request";
 import WalletModel from "../../wallet/model/wallet.model";
 import TransactionModel, { Transaction } from "../model/transaction.model";
 
@@ -31,7 +32,7 @@ export default class TransactionService {
     async validateWallet(id, trx, message) {
         let wallet = await this.walletModel.findByUserId(id, trx);
         if (!wallet) {
-            throw new Error(message);
+            throw new BadRequestError(message);
         }
         return wallet;
     }
@@ -39,7 +40,7 @@ export default class TransactionService {
     async validateBalance(id, amount,  trx) {
         let wallet = await this.walletModel.findByUserId(id, trx);
         if (wallet.balance < amount) {
-            throw new Error("Wallet has insufficient funds");
+            throw new BadRequestError("Wallet has insufficient funds");
         }
         return true;
     }
@@ -48,18 +49,18 @@ export default class TransactionService {
     async validateInput(transactionData): Promise<void> {
         // Check if transaction type is provided
         if (!transactionData.transaction_type) {
-            throw new Error('Transaction type not provided');
+            throw new BadRequestError('Transaction type not provided');
         }
 
         // Validate transfer-specific fields
         if (transactionData.transaction_type === "transfer") {
             if (!transactionData.sender_id || !transactionData.recipient_id || !transactionData.amount) {
-                throw new Error('All fields (sender, recipient, amount, effect) must be filled for transfer');
+                throw new BadRequestError('All fields (sender, recipient, amount, effect) must be filled for transfer');
             }
         } else {
             // Validate other transaction types (e.g., deposit/withdrawal)
             if (!transactionData.recipient_id || !transactionData.amount || !transactionData.effect) {
-                throw new Error('All fields (recipient, amount, effect) must be filled for this transaction');
+                throw new BadRequestError('All fields (recipient, amount, effect) must be filled for this transaction');
             }
         }
     }
@@ -148,6 +149,7 @@ export default class TransactionService {
 
             return transaction;
         } catch(error) {
+            await trx.rollback();
             console.error("Error transferring funds: ", error);
             throw error;
         }

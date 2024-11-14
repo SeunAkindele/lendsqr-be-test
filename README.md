@@ -22,7 +22,7 @@ Entity-Relationship Diagram
 
 ## Accessing the API Endpoints through Postman:
 
-**Postman URL** ``
+**Postman URL** `https://app.getpostman.com/join-team?invite_code=2400c16b5bb6048647ed722c486d4787&target_code=9fa3a6d18b4cd11f004442873ac60a0c`
 
 ## Accessing the API Endpoints through Heroku commands:
 

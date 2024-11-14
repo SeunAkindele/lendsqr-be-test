@@ -1,3 +1,4 @@
+import { BadRequestError } from "../../error/bad-request";
 import WalletModel, { Wallet } from "../model/wallet.model";
 const knex = require('../../knexfile');
 
@@ -10,13 +11,13 @@ export default class WalletService {
  
     async create(walletData: Wallet): Promise<Wallet | string> {
         if (!walletData.user_id) {
-            return 'No user account was provideds';
+            throw new BadRequestError('No user account was provideds');
         }
         const trx = await knex.transaction();
         try {
             const wallet = await this.findByUserId(walletData.user_id, trx);
             if(wallet) {
-                return 'You already created a wallet with this account.';
+                throw new BadRequestError('You already created a wallet with this account.');
             }
             return await this.walletModel.create(walletData);
         } catch(error) {
