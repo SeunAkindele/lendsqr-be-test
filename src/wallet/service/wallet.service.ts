@@ -1,12 +1,15 @@
+import UserModel from "../../user/model/user.model";
 import { BadRequestError } from "../../error/bad-request";
 import WalletModel, { Wallet } from "../model/wallet.model";
 const knex = require('../../knexfile');
 
 export default class WalletService {
     private walletModel: WalletModel;
+    private userModel: UserModel;
 
     constructor() {
         this.walletModel = new WalletModel();
+        this.userModel = new UserModel();
     }
  
     async create(walletData: Wallet): Promise<Wallet | string> {
@@ -15,6 +18,10 @@ export default class WalletService {
         }
         const trx = await knex.transaction();
         try {
+            const user = await this.userModel.findById(walletData.user_id);
+            if(!user) {
+                throw new BadRequestError('This accout does not exist.');
+            }
             const wallet = await this.findByUserId(walletData.user_id, trx);
             if(wallet) {
                 throw new BadRequestError('You already created a wallet with this account.');
