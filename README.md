@@ -28,7 +28,7 @@ Entity-Relationship Diagram
 ## Accessing the API Endpoints through Postman:
 
 **Postman URL**
-`https://lively-meadow-691836.postman.co/workspace/lendsqr-be-test-mvp-wallet-serv~0a2fcdb5-5bd9-4a07-9030-3e32b91ef309/collection/13229365-b2de4be4-3093-4d3a-b5b1-4ee01e9dffb0?action=share&creator=13229365&active-environment=13229365-84250c3e-e993-46e3-a2e9-8de2159ec3f2`
+`https://lively-meadow-691836.postman.co/workspace/lendsqr-be-test-mvp-wallet-serv~0a2fcdb5-5bd9-4a07-9030-3e32b91ef309/collection/13229365-b2de4be4-3093-4d3a-b5b1-4ee01e9dffb0?action=share&creator=13229365`
 
 ## Accessing the API Endpoints through Heroku commands:
 
