@@ -52,6 +52,10 @@ export default class TransactionService {
             throw new BadRequestError('Transaction type not provided');
         }
 
+        if (transactionData.transaction_type !== 'withdrawal' && transactionData.transaction_type !== 'deposit' && transactionData.transaction_type !== 'transfer') {
+            throw new BadRequestError('Invalid transaction type');
+        }
+
         // Validate transfer-specific fields
         if (transactionData.transaction_type === "transfer") {
             if (!transactionData.sender_id || !transactionData.recipient_id || !transactionData.amount) {
@@ -59,14 +63,18 @@ export default class TransactionService {
             }
         } else {
             // Validate other transaction types (e.g., deposit/withdrawal)
-            if (!transactionData.recipient_id || !transactionData.amount || !transactionData.effect) {
+            if (!transactionData.recipient_id || !transactionData.amount) {
                 throw new BadRequestError('All fields (recipient, amount, effect) must be filled for this transaction');
             }
         }
     }
  
     async transact(transactionData: Transaction): Promise<Transaction> {
+        if(transactionData.transaction_type === "transfer"){
+            throw new BadRequestError('This is not a transfer transaction');
+        }
         await this.validateInput(transactionData);
+        
         const {transaction_type, amount, recipient_id} = transactionData;
         
         const trx = await knex.transaction();
@@ -78,7 +86,11 @@ export default class TransactionService {
             }
 
             const token = await this.transactionId();
-            const newTransaction = await this.transactionModel.create({...transactionData, token}, trx);
+            const newTransaction = await this.transactionModel.create({
+                ...transactionData, 
+                token,
+                effect: transaction_type === "withdrawal" ? 'dr' : 'cr'
+            }, trx);
             
             // Checks if transaction type is deposit or withdrawal and gets wallet balance
             const walletBalance = await this.processDepostiWithdrawal(wallet, newTransaction, transaction_type);

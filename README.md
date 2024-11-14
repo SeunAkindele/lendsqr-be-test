@@ -1,14 +1,19 @@
 # Lendsqr be test MVP Wallet Service
 
-A simple wallet service API that allows users to create accounts, deposit funds, transfer funds, and withdraw funds. This project is being built as an MVP to demonstrate basic wallet functionality. A blacklist check to prevent blacklisted users was also implemeted through integration with external services.
+A simple wallet service API that allows users to create accounts, deposit funds,
+transfer funds, and withdraw funds. This project is being built as an MVP to
+demonstrate basic wallet functionality. A blacklist check to prevent blacklisted
+users was also implemeted through integration with external services.
 
 ## Features:
+
 - User account creation
 - Fund deposit and withdrawal
 - Transfer funds between users
 - Prevent onboarding of users that are blacklisted on Lendsqr karma blacklist
 
 ## Technologies Used:
+
 - NodeJS (LTS version)
 - MySQL database
 - KnexJS ORM
@@ -22,22 +27,25 @@ Entity-Relationship Diagram
 
 ## Accessing the API Endpoints through Postman:
 
-**Postman URL** `https://app.getpostman.com/join-team?invite_code=2400c16b5bb6048647ed722c486d4787&target_code=9fa3a6d18b4cd11f004442873ac60a0c`
+**Postman URL**
+`https://lively-meadow-691836.postman.co/workspace/lendsqr-be-test-mvp-wallet-serv~0a2fcdb5-5bd9-4a07-9030-3e32b91ef309/collection/13229365-b2de4be4-3093-4d3a-b5b1-4ee01e9dffb0?action=share&creator=13229365&active-environment=13229365-84250c3e-e993-46e3-a2e9-8de2159ec3f2`
 
 ## Accessing the API Endpoints through Heroku commands:
 
 **Base URL** `https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com`
 
 ### User
-- **GET** `/api/users` - Retrieve all users
-`cURL` command:
+
+- **GET** `/api/users` - Retrieve all users `cURL` command:
+
 ```bash
 curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/users \
 -H "Content-Type: application/json"
 ```
 
 - **POST** `/api/users` - Registers all users provided they are not blacklisted
-`cURL` command:
+  `cURL` command:
+
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/users \
   -H "Authorization: Bearer faux-token-1234567890" \
@@ -50,16 +58,17 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/us
 ```
 
 ### Wallet
-- **GET** `/api/wallets` - Retrieve all wallets
-`cURL` command:
+
+- **GET** `/api/wallets` - Retrieve all wallets `cURL` command:
+
 ```bash
 curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/wallets \
 -H "Authorization: Bearer faux-token-1234567890" \
 -H "Content-Type: application/json"
 ```
 
-- **POST** `/api/wallets` - Creates wallet for user
-`cURL` command:
+- **POST** `/api/wallets` - Creates wallet for user `cURL` command:
+
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/wallets \
   -H "Authorization: Bearer faux-token-1234567890" \
@@ -70,16 +79,17 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/wa
 ```
 
 ### Transaction
-- **GET** `/api/transactions` - Retrieve transaction history
-`cURL` command:
+
+- **GET** `/api/transactions` - Retrieve transaction history `cURL` command:
+
 ```bash
 curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions \
 -H "Authorization: Bearer faux-token-1234567890" \
 -H "Content-Type: application/json"
 ```
 
-- **POST** `/api/transactions/deposit-withdrawal` - Funds wallet
-`cURL` command:
+- **POST** `/api/transactions/deposit-withdrawal` - Funds wallet `cURL` command:
+
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions/deposit-withdrawal \
   -H "Authorization: Bearer faux-token-1234567890" \
@@ -92,8 +102,9 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
       }'
 ```
 
-- **POST** `/api/transactions/deposit-withdrawal` - Withdraws from wallet
-`cURL` command:
+- **POST** `/api/transactions/deposit-withdrawal` - Withdraws from wallet `cURL`
+  command:
+
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions/deposit-withdrawal \
   -H "Authorization: Bearer faux-token-1234567890" \
@@ -106,8 +117,9 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
       }'
 ```
 
-- **POST** `/api/transactions/transfer` - Transfer funds to another user's wallet
-`cURL` command:
+- **POST** `/api/transactions/transfer` - Transfer funds to another user's
+  wallet `cURL` command:
+
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/transactions/transfer \
   -H "Authorization: Bearer faux-token-1234567890" \
@@ -121,6 +133,7 @@ curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/tr
 ```
 
 ## Test
+
 ```bash
 npm run test
 ```
