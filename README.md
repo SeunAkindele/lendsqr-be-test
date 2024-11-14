@@ -49,7 +49,6 @@ curl -X GET https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/use
 
 ```bash
 curl -X POST https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com/api/users \
-  -H "Authorization: Bearer faux-token-1234567890" \
   -H "Content-Type: application/json" \
   -d '{
         "name": "newuser",
