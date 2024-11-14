@@ -20,7 +20,11 @@ Entity-Relationship Diagram
 
 ![Entity-Relationship Diagram](src/er-diagram.png)
 
-## Accessing the API Endpoints:
+## Accessing the API Endpoints through Postman:
+
+**Postman URL** ``
+
+## Accessing the API Endpoints through Heroku commands:
 
 **Base URL** `https://oluwaseun-lendsqr-be-test-4c4a8256975c.herokuapp.com`
 
