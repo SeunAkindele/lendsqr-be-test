@@ -10,7 +10,7 @@ export default class UserService {
     }
 
     // using Lendsqr Adjutor Karma blacklist api
-    async checkBlacklist(email) {
+    async checkBlacklist(email: string) {
         try {
             const response = await axios.get(`${process.env.KARMA_BLACKLIST_API_URL}`, {
                 params: {
@@ -29,7 +29,7 @@ export default class UserService {
                 console.log(`User is not blacklisted: ${response.data}`);
                 return false;
             }
-        } catch (error) {
+        } catch (error:any) {
             console.error('Error checking blacklist:', error.response ? error.response.data : error.message);
             throw new Error('Failed to check blacklist status');
         }

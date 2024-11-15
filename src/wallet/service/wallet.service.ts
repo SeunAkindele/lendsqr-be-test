@@ -42,11 +42,11 @@ export default class WalletService {
         }
     }
 
-    async findByUserId(id: number, trx): Promise<Wallet | undefined> {
+    async findByUserId(id: number, trx:any): Promise<Wallet | undefined> {
         return await this.walletModel.findByUserId(id, trx);
     }
 
-    async update(id: number, walletData: Wallet, trx): Promise<Wallet> {
+    async update(id: number, walletData: Wallet, trx:any): Promise<Wallet | undefined> {
         try {
             return await this.walletModel.update(id, walletData, trx);
         } catch(error) {

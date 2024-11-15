@@ -34,7 +34,7 @@ export default class TransactionModel {
     return await knex(this.table).where({ user_id }).first();
   }
 
-  async create(transaction: Transaction, trx): Promise<Transaction> {
+  async create(transaction: Transaction, trx:any): Promise<Transaction> {
     const [insertedId] = await knex(this.table)
             .transacting(trx) // Link this insert to the transaction
             .insert(transaction);

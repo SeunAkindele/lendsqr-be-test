@@ -21,7 +21,7 @@ export default class WalletModel {
     return await knex(this.table).where({ id }).first();
   }
 
-  async findByUserId(user_id: number, trx): Promise<Wallet | undefined> {
+  async findByUserId(user_id: number | undefined, trx: any): Promise<Wallet | undefined> {
     return await knex(this.table).transacting(trx).where({ user_id }).first();
   }
 
@@ -32,7 +32,7 @@ export default class WalletModel {
     return newWallet!;
   }
 
-  async update(user_id: number, wallet: Partial<Wallet>, trx): Promise<Wallet | undefined> {
+  async update(user_id: number | undefined, wallet: Partial<Wallet>, trx: any): Promise<Wallet | undefined> {
     await knex(this.table).where({ user_id }).transacting(trx).update(wallet);
     return await this.findByUserId(user_id, trx);
   }

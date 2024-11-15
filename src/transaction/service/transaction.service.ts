@@ -1,5 +1,5 @@
 import { BadRequestError } from "../../error/bad-request";
-import WalletModel from "../../wallet/model/wallet.model";
+import WalletModel, { Wallet } from "../../wallet/model/wallet.model";
 import TransactionModel, { Transaction } from "../model/transaction.model";
 
 const knex = require('../../knexfile');
@@ -20,7 +20,7 @@ export default class TransactionService {
         return token.toString();
       }
     
-    async processDepostiWithdrawal(wallet, newTransaction, type) {
+    async processDepostiWithdrawal(wallet: Wallet, newTransaction: Transaction, type: string) {
         if(type === "deposit"){
             return Number(wallet.balance) + Number(newTransaction.amount);
         }
@@ -29,7 +29,7 @@ export default class TransactionService {
         }
     }
 
-    async validateWallet(id, trx, message) {
+    async validateWallet(id: number | undefined, trx: any, message: string) {
         let wallet = await this.walletModel.findByUserId(id, trx);
         if (!wallet) {
             throw new BadRequestError(message);
@@ -37,16 +37,16 @@ export default class TransactionService {
         return wallet;
     }
 
-    async validateBalance(id, amount,  trx) {
-        let wallet = await this.walletModel.findByUserId(id, trx);
-        if (wallet.balance < amount) {
+    async validateBalance(id: number | undefined, amount: number,  trx:any) {
+        let wallet: Wallet | undefined = await this.walletModel.findByUserId(id, trx);
+        if (wallet?.balance && wallet.balance < amount) {
             throw new BadRequestError("Wallet has insufficient funds");
         }
         return true;
     }
 
     // Input validation
-    async validateInput(transactionData): Promise<void> {
+    async validateInput(transactionData: Transaction): Promise<void> {
         // Check if transaction type is provided
         if (!transactionData.transaction_type) {
             throw new BadRequestError('Transaction type not provided');
@@ -87,13 +87,10 @@ export default class TransactionService {
 
             const token = await this.transactionId();
             const newTransaction = await this.transactionModel.create({
-                ...transactionData, 
-                token,
-                effect: 
-                    transaction_type === "withdrawal" ? 
-                    'dr' : 
-                    'cr'
-            }, trx);
+                    ...transactionData, 
+                    token,
+                    effect: transaction_type === "withdrawal" ? 'dr' : 'cr'
+                }, trx);
             
             // Checks if transaction type is deposit or withdrawal and gets wallet balance
             const walletBalance = await this.processDepostiWithdrawal(wallet, newTransaction, transaction_type);
@@ -115,10 +112,10 @@ export default class TransactionService {
         }
     }
 
-    async processTransaction(transactionData, user_id, effect, token, trx) {
+    async processTransaction(transactionData: Transaction, user_id: number | undefined, effect: string, token: string, trx: any) {
         const {amount} = transactionData;
 
-        const wallet = await this.validateWallet(user_id, trx, `${effect === 'cr' && 'Reciepient'} wallet not found`);
+        const wallet = await this.validateWallet(user_id, trx, `${effect === 'cr' && 'reciepient'} wallet not found`);
         await this.validateBalance(user_id, amount, trx);
         
         const transaction = await this.transactionModel.create({...transactionData, token, effect}, trx);
@@ -132,13 +129,13 @@ export default class TransactionService {
         }
     } 
 
-    async transfer(transactionData: Transaction): Promise<Transaction | string> {
+    async transfer(transactionData: Transaction): Promise<Transaction | string | undefined> {
         await this.validateInput(transactionData);
         const trx = await knex.transaction();
         try {
             const token = await this.transactionId();
             // processes sender transaction
-            const transaction = await this.processTransaction(transactionData, transactionData.sender_id, 'dr', token, trx);
+            const transaction = await this.processTransaction(transactionData, transactionData?.sender_id, 'dr', token, trx);
 
             // throw new Error("Simulated error before wallet update to check if rollback works");
 

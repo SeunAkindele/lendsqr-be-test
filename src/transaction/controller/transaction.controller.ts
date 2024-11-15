@@ -10,7 +10,7 @@ router.post('/deposit-withdrawal', fauxAuthMiddleware, async (req: Request, res:
     try{
         const user = await transactionService.transact(req.body);
         res.status(201).json(user);
-    } catch (error) {
+    } catch (error:any) {
         if (error instanceof BadRequestError) {
             res.status(error.statusCode).json({ error: error.message });
         } else {
@@ -24,7 +24,7 @@ router.post('/transfer', fauxAuthMiddleware, async (req: Request, res: Response)
     try{
         const user = await transactionService.transfer(req.body);
         res.status(201).json(user);
-    } catch (error) {
+    } catch (error:any) {
         if (error instanceof BadRequestError) {
             res.status(error.statusCode).json({ error: error.message });
         } else {
@@ -38,7 +38,7 @@ router.get('/', fauxAuthMiddleware, async (req: Request, res: Response) => {
     try{
         const users = await transactionService.findAll();
         res.status(200).json(users);
-    }catch (error) {
+    }catch (error:any) {
         console.error('Error fetching transaction history:', error);
         res.status(500).json({ error: error.message });
     }
