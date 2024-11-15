@@ -26,7 +26,7 @@ export default class UserService {
                 console.log(`User is blacklisted: ${response.data.details}`);
                 return true;
             } else {
-                console.log(`User is not blacklisted: ${response.data}`);
+                console.log('User is not blacklisted');
                 return false;
             }
         } catch (error:any) {

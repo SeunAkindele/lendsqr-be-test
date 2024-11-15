@@ -23,7 +23,7 @@ export default class TransactionModel {
             )
             .leftJoin(`${this.users} as sender`, `${this.table}.sender_id`, '=', 'sender.id')  // Left join for sender_id (may be null)
             .join(`${this.users} as recipient`, `${this.table}.recipient_id`, '=', 'recipient.id');  // Join for recipient_id (never null)
-   
+
   }
 
   async findById(id: number): Promise<Transaction | undefined> {

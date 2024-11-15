@@ -5,6 +5,7 @@ jest.mock('../../knexfile', () => {
 });
 
 import UserService from "./user.service";
+import MockAdapter from 'axios-mock-adapter';
 
 const axios = require('axios');
 const AxiosMockAdapter = require('axios-mock-adapter');
@@ -13,8 +14,8 @@ dotenv.config({ path: '.env' });
 require("../../knexfile");
 
 describe('UserService - checkBlacklist', () => {
-    let userService;
-    let mockAxios;
+    let userService: UserService;
+    let mockAxios: any;
 
     beforeAll(() => {
         userService = new UserService(); // Instantiate UserService

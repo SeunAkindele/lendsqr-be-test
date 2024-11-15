@@ -10,7 +10,7 @@ router.post('/deposit-withdrawal', fauxAuthMiddleware, async (req: Request, res:
     try{
         const user = await transactionService.transact(req.body);
         res.status(201).json(user);
-    } catch (error:any) {
+    } catch (error: any) {
         if (error instanceof BadRequestError) {
             res.status(error.statusCode).json({ error: error.message });
         } else {
