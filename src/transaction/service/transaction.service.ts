@@ -122,7 +122,7 @@ export default class TransactionService {
         const transaction = await this.transactionModel.create({...transactionData, token, effect}, trx);
 
         const updated_at = new Date();
-        const walletBalance = Number(wallet.balance) - Number(transaction.amount);
+        const walletBalance =  effect === 'dr' ? Number(wallet.balance) - Number(transaction.amount) : Number(wallet.balance) + Number(transaction.amount);
         await this.walletModel.update(user_id, {balance: walletBalance, updated_at }, trx);
 
         if(effect === 'dr'){
