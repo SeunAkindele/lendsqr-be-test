@@ -40,7 +40,7 @@ export default class TransactionService {
     async validateBalance(id: number | undefined, amount: number,  trx:any) {
         let wallet: Wallet | undefined = await this.walletModel.findByUserId(id, trx);
         if (wallet?.balance && wallet.balance < amount) {
-            throw new BadRequestError("Wallet has insufficient funds");
+            throw new BadRequestError(`Wallet has insufficient funds`);
         }
         return true;
     }
@@ -116,7 +116,8 @@ export default class TransactionService {
         const {amount} = transactionData;
 
         const wallet = await this.validateWallet(user_id, trx, `${effect === 'cr' && 'reciepient'} wallet not found`);
-        await this.validateBalance(user_id, amount, trx);
+
+        effect === 'dr' && await this.validateBalance(user_id, amount, trx);
         
         const transaction = await this.transactionModel.create({...transactionData, token, effect}, trx);
 
