@@ -1,4 +1,4 @@
-import express, { Application } from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 dotenv.config({ path: '.env' });
@@ -14,6 +14,23 @@ app.get('/', (req, res) => {
     res.send('Welcome to the MVP wallet service');
 });
 
-app.use('/api', router)
+app.use('/api', router);
+
+// Middleware to handle invalid routes
+app.use((req: Request, res: Response, next: NextFunction) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found',
+    });
+});
+
+// Error handling middleware for other errors (optional)
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    console.error(err.stack);
+    res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+    });
+});
 
 export default app;
