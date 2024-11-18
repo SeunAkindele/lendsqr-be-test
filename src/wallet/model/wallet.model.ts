@@ -13,7 +13,7 @@ export default class WalletModel {
 
   async findAll(): Promise<Wallet[]> {
     return await knex(this.table)
-            .select(`${this.table}.*`, `${this.users}.name as name`)  // Select all wallet columns + the owner's name
+            .select(`${this.table}.balance`, `${this.table}.updated_at`, `${this.users}.name as name`)  // Select all wallet columns + the owner's name
             .join(this.users, `${this.table}.user_id`, '=', `${this.users}.id`);
   }
 

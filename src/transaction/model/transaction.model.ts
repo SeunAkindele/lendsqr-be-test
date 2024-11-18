@@ -17,7 +17,10 @@ export default class TransactionModel {
   async findAll(): Promise<Transaction[]> {
     return await knex(this.table)
             .select(
-              `${this.table}.*`,                    // Select all transaction columns
+              `${this.table}.amount`,
+              `${this.table}.token`,  
+              `${this.table}.transaction_type`,  
+              `${this.table}.created_at`, 
                 'sender.name as sender',           // Sender's name (if exists)
                 'recipient.name as recipient'      // Recipient's name
             )

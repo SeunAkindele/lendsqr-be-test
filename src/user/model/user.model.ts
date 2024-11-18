@@ -16,7 +16,7 @@ export default class UserModel {
   constructor() {}
 
   async findAll(): Promise<User[]> {
-    return await knex(this.table).select('*');
+    return await knex(this.table).select('name', 'email');
   }
 
   async findById(id: number): Promise<User | undefined> {
