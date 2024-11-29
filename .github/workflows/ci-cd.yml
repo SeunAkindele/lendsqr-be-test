@@ -26,3 +26,10 @@ jobs:  # Defines the jobs that will be executed in this workflow
 
       - name: Run tests  # Step to run the test suite
         run: npm test  # Runs 'npm test' to execute the automated tests
+        
+      - name: Deploy to Heroku  # Step to deploy to Heroku
+        uses: akshnz/heroku-deploy@v3  # Heroku deploy GitHub Action
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}  # Uses the Heroku API key stored as a secret
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}  # Specifies your Heroku app name
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}  # Optional: Your Heroku account email, if required
