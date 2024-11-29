@@ -26,10 +26,6 @@ jobs:  # Defines the jobs that will be executed in this workflow
 
       - name: Run tests  # Step to run the test suite
         run: npm test  # Runs 'npm test' to execute the automated tests
-        
-      - name: Install Heroku CLI  # Install the Heroku CLI
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
 
       - name: Authenticate to Heroku  # Authenticate using Heroku API key
         run: |
