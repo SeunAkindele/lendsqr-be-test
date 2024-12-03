@@ -26,18 +26,5 @@ jobs:  # Defines the jobs that will be executed in this workflow
 
       - name: Run tests  # Step to run the test suite
         run: npm test  # Runs 'npm test' to execute the automated tests
-        
-      - name: Install Heroku CLI  # Install the Heroku CLI
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
-
-      - name: Authenticate to Heroku  # Authenticate using Heroku API key
-        run: |
-          echo ${{ secrets.HEROKU_OAUTH_TOKEN }} | heroku auth:token
-
-      - name: Add Heroku remote  # Add Heroku app remote for git deployment
-        run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-
-      - name: Deploy to Heroku  # Deploy to Heroku by pushing to the Heroku git remote
-        run: git push heroku main  # Push the code to Heroku's main branch
+    
         
