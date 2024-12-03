@@ -33,7 +33,7 @@ jobs:  # Defines the jobs that will be executed in this workflow
 
       - name: Authenticate to Heroku  # Authenticate using Heroku OAuth token
         run: |
-          echo ${{ secrets.HEROKU_OAUTH_TOKEN }} | heroku auth:token  # Use the OAuth token instead of the API key
+          echo ${{ secrets.HEROKU_OAUTH_TOKEN }} | heroku auth:token
 
       - name: Add Heroku remote  # Add Heroku app remote for git deployment
         run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
