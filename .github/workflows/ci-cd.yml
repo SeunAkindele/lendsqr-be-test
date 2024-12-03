@@ -33,7 +33,7 @@ jobs:
 
       - name: Debug Heroku Authentication
         run: |
-          echo "OAuth token length: ${#{{ secrets.HEROKU_OAUTH_TOKEN }}}"
+          echo "OAuth token length: ${{ secrets.HEROKU_OAUTH_TOKEN }}"
           heroku whoami
 
       - name: Authenticate to Heroku
