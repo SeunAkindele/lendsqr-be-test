@@ -31,9 +31,9 @@ jobs:  # Defines the jobs that will be executed in this workflow
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
 
-      - name: Authenticate to Heroku  # Authenticate using Heroku API key
+      - name: Authenticate to Heroku  # Authenticate using Heroku OAuth token
         run: |
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
+          echo ${{ secrets.HEROKU_OAUTH_TOKEN }} | heroku auth:token  # Use the OAuth token instead of the API key
 
       - name: Add Heroku remote  # Add Heroku app remote for git deployment
         run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
