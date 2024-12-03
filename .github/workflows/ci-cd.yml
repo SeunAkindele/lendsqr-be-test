@@ -30,10 +30,12 @@ jobs:
       - name: Install Heroku CLI
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
+          heroku --version
 
       - name: Authenticate to Heroku
         run: |
           echo ${{ secrets.HEROKU_OAUTH_TOKEN }} | heroku auth:token
+          heroku apps
 
       - name: Add Heroku remote
         run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
