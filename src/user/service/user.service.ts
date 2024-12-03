@@ -46,6 +46,7 @@ export default class UserService {
             //     return `This user is in the Lendsqr Adjutor Karma blacklist and cannot onboard`;
             // }
             
+            
             const user = await this.findByEmail(userData.email);
             if(user) {
                 return 'This email already exist';
