@@ -39,7 +39,7 @@ jobs:
       - name: Authenticate to Heroku
         run: |
           echo "Authenticating with Heroku..."
-          echo ${{ secrets.HEROKU_OAUTH_TOKEN }} | heroku auth:token
+          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
           heroku whoami
 
       - name: List Heroku Apps
