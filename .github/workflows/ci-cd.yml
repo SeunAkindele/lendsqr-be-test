@@ -32,13 +32,14 @@ jobs:
           curl https://cli-assets.heroku.com/install.sh | sh
           heroku --version
 
+      # Debugging step (remove after confirming OAuth token is correct)
       - name: Print environment variables for debugging
         run: echo "HEROKU_OAUTH_TOKEN=${{ secrets.HEROKU_OAUTH_TOKEN }}"
 
       - name: Authenticate to Heroku
         run: |
           echo "Authenticating with Heroku..."
-          echo ${{ secrets.HEROKU_OAUTH_TOKEN }} | heroku auth:token --interactive=false
+          echo ${{ secrets.HEROKU_OAUTH_TOKEN }} | heroku auth:token
           heroku whoami
 
       - name: List Heroku Apps
