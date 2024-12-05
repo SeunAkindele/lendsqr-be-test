@@ -36,6 +36,7 @@ jobs:
         run: |
           echo "Authenticating with Heroku..."
           echo ${{ secrets.HEROKU_API_KEY }} > ~/.netrc
+          export HEROKU_DEBUG=1
           heroku whoami
 
       - name: List Heroku Apps
@@ -46,4 +47,4 @@ jobs:
 
       - name: Deploy to Heroku
         run: git push heroku main
-        
+
