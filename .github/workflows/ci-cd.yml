@@ -32,6 +32,9 @@ jobs:
           curl https://cli-assets.heroku.com/install.sh | sh
           heroku --version
 
+      - name: Print environment variables for debugging
+        run: echo "HEROKU_OAUTH_TOKEN=${{ secrets.HEROKU_OAUTH_TOKEN }}"
+
       - name: Authenticate to Heroku
         run: |
           echo "Authenticating with Heroku..."
