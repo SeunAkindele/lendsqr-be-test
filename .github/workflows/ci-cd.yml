@@ -27,23 +27,23 @@ jobs:
       - name: Run tests
         run: npm test
 
-      # - name: Install Heroku CLI
-      #   run: |
-      #     curl https://cli-assets.heroku.com/install.sh | sh
-      #     heroku --version
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+          heroku --version
 
-      # - name: Authenticate to Heroku
-      #   run: |
-      #     echo "Authenticating with Heroku..."
-      #     echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
-      #     heroku whoami
+      - name: Authenticate to Heroku
+        run: |
+          echo "Authenticating with Heroku..."
+          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
+          heroku whoami
 
-      # - name: List Heroku Apps
-      #   run: heroku apps  # Check if your Heroku app is visible
+      - name: List Heroku Apps
+        run: heroku apps  # Check if your Heroku app is visible
 
-      # - name: Add Heroku remote
-      #   run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+      - name: Add Heroku remote
+        run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
 
-      # - name: Deploy to Heroku
-      #   run: git push heroku main
+      - name: Deploy to Heroku
+        run: git push heroku main
 
