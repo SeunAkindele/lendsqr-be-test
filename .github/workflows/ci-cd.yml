@@ -32,13 +32,10 @@ jobs:
           curl https://cli-assets.heroku.com/install.sh | sh
           heroku --version
 
-      - name: Clear Heroku Auth (Optional)
-        run: heroku auth:logout
-
       - name: Authenticate to Heroku
         run: |
           echo "Authenticating with Heroku..."
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:login --api-key
+          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
           heroku whoami
 
       - name: List Heroku Apps
