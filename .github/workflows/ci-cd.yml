@@ -27,22 +27,22 @@ jobs:
       - name: Run tests  # Run the test suite to ensure the code works as expected
         run: npm test  # Run tests using npm
 
-      - name: Install Heroku CLI  # Install Heroku CLI on the GitHub runner
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh  # Download and install Heroku CLI
-          heroku --version  # Verify installation by checking the Heroku CLI version
+      # - name: Install Heroku CLI  # Install Heroku CLI on the GitHub runner
+      #   run: |
+      #     curl https://cli-assets.heroku.com/install.sh | sh  # Download and install Heroku CLI
+      #     heroku --version  # Verify installation by checking the Heroku CLI version
 
-      - name: Authenticate to Heroku  # Authenticate with Heroku using the API key stored in secrets
-        run: |
-          echo "Authenticating with Heroku..."
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
-          heroku whoami
+      # - name: Authenticate to Heroku  # Authenticate with Heroku using the API key stored in secrets
+      #   run: |
+      #     echo "Authenticating with Heroku..."
+      #     echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
+      #     heroku whoami
 
-      - name: List Heroku Apps  # List all Heroku apps to verify authentication is successful
-        run: heroku apps  # Run the `heroku apps` command to list the apps available
+      # - name: List Heroku Apps  # List all Heroku apps to verify authentication is successful
+      #   run: heroku apps  # Run the `heroku apps` command to list the apps available
 
-      - name: Add Heroku remote  # Add Heroku Git remote to deploy to the Heroku app
-        run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git  # Set up the Heroku remote URL using the app name stored in secrets
+      # - name: Add Heroku remote  # Add Heroku Git remote to deploy to the Heroku app
+      #   run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git  # Set up the Heroku remote URL using the app name stored in secrets
 
-      - name: Deploy to Heroku  # Push the changes to Heroku for deployment
-        run: git push heroku main  # Push the main branch to Heroku to trigger the deployment process
+      # - name: Deploy to Heroku  # Push the changes to Heroku for deployment
+      #   run: git push heroku main  # Push the main branch to Heroku to trigger the deployment process
