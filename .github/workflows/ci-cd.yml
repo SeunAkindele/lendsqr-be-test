@@ -1,48 +1,48 @@
-name: Heroku Deployment CI
+name: Heroku Deployment CI  # Define the name of the workflow
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger this workflow on a push to the main branch
   pull_request:
     branches:
-      - main
+      - main  # Trigger this workflow when a pull request is made to the main branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner for the job
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout repository  # Step to checkout the code from the repository
+        uses: actions/checkout@v3  # Use the official GitHub action to checkout the code
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Set up Node.js  # Set up Node.js environment for building and testing
+        uses: actions/setup-node@v3  # Use the setup-node action to configure Node.js
         with:
-          node-version: '18'
+          node-version: '18'  # Specify the Node.js version to use
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies  # Install the dependencies defined in package.json
+        run: npm install  # Run npm install to install the required packages
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests  # Run the test suite to ensure the code works as expected
+        run: npm test  # Run tests using npm
 
-      - name: Install Heroku CLI
+      - name: Install Heroku CLI  # Install Heroku CLI on the GitHub runner
         run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
-          heroku --version
+          curl https://cli-assets.heroku.com/install.sh | sh  # Download and install Heroku CLI
+          heroku --version  # Verify installation by checking the Heroku CLI version
 
-      - name: Authenticate to Heroku
+      - name: Authenticate to Heroku  # Authenticate with Heroku using the API key stored in secrets
         run: |
           echo "Authenticating with Heroku..."
           echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
           heroku whoami
 
-      - name: List Heroku Apps
-        run: heroku apps  # Check if your Heroku app is visible
+      - name: List Heroku Apps  # List all Heroku apps to verify authentication is successful
+        run: heroku apps  # Run the `heroku apps` command to list the apps available
 
-      - name: Add Heroku remote
-        run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+      - name: Add Heroku remote  # Add Heroku Git remote to deploy to the Heroku app
+        run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git  # Set up the Heroku remote URL using the app name stored in secrets
 
-      - name: Deploy to Heroku
-        run: git push heroku main
+      - name: Deploy to Heroku  # Push the changes to Heroku for deployment
+        run: git push heroku main  # Push the main branch to Heroku to trigger the deployment process
