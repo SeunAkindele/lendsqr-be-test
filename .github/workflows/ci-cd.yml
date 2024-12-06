@@ -38,10 +38,10 @@ jobs:
       - name: Clear Heroku Auth
         run: heroku auth:logout || true  # Clear any existing session
 
-      - name: Authenticate to Heroku
+      - name: Authenticate to Heroku (Using API Key)
         run: |
           echo "Authenticating with Heroku..."
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:login
+          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
           heroku whoami
 
       - name: List Heroku Apps
