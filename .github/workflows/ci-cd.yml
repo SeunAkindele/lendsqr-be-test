@@ -41,7 +41,7 @@ jobs:
       - name: Authenticate to Heroku
         run: |
           echo "Authenticating with Heroku..."
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
+          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:login
           heroku whoami
 
       - name: List Heroku Apps
@@ -52,4 +52,3 @@ jobs:
 
       - name: Deploy to Heroku
         run: git push heroku main
-
