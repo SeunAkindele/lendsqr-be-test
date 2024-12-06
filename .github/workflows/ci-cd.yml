@@ -32,10 +32,12 @@ jobs:
           curl https://cli-assets.heroku.com/install.sh | sh
           heroku --version
 
-      - name: Authenticate to Heroku
+      - name: Authenticate to Heroku (Manual Intervention)
         run: |
           echo "Authenticating with Heroku..."
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
+          echo "**Please enter your Heroku 2FA code:**"
+          read -r heroku_2fa_code
+          echo $heroku_2fa_code | heroku auth:token -
           heroku whoami
 
       - name: List Heroku Apps
