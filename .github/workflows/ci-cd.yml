@@ -40,12 +40,15 @@ jobs:
           heroku whoami
 
       - name: List Heroku Apps
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: heroku apps
 
       - name: Add Heroku remote
         run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+
+      - name: Set up Git authentication with Heroku API key
+        run: |
+          git config --global credential.helper "store"
+          echo "https://$HEROKU_API_KEY:@git.heroku.com" > ~/.git-credentials
 
       - name: Deploy to Heroku
         run: git push heroku main
