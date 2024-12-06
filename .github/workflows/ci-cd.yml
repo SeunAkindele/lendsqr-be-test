@@ -47,8 +47,12 @@ jobs:
 
       - name: Set up Git authentication with Heroku API key
         run: |
-          git config --global credential.helper "store"
+          git config --global credential.helper store
           echo "https://$HEROKU_API_KEY:@git.heroku.com" > ~/.git-credentials
+          
+      # Debugging step (optional): Verify credentials in the credentials file
+      - name: Verify Git Credentials
+        run: cat ~/.git-credentials
 
       - name: Deploy to Heroku
         run: git push heroku main
