@@ -43,16 +43,10 @@ jobs:
         run: heroku apps
 
       - name: Add Heroku remote
-        run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+        run: git remote add heroku https://$HEROKU_API_KEY:@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
 
-      - name: Set up Git authentication with Heroku API key
-        run: |
-          git config --global credential.helper store
-          echo "https://$HEROKU_API_KEY:@git.heroku.com" > ~/.git-credentials
-          
-      # Debugging step (optional): Verify credentials in the credentials file
-      - name: Verify Git Credentials
-        run: cat ~/.git-credentials
+      - name: Debugging: Check Remote URL
+        run: git remote -v
 
       - name: Deploy to Heroku
         run: git push heroku main
