@@ -32,6 +32,12 @@ jobs:
           curl https://cli-assets.heroku.com/install.sh | sh
           heroku --version
 
+      - name: Check if Heroku API Key is available
+        run: echo "HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }}" | head -c 10  # print part of the key for verification
+
+      - name: Clear Heroku Auth
+        run: heroku auth:logout || true  # Clear any existing session
+
       - name: Authenticate to Heroku
         run: |
           echo "Authenticating with Heroku..."
@@ -46,4 +52,3 @@ jobs:
 
       - name: Deploy to Heroku
         run: git push heroku main
-
