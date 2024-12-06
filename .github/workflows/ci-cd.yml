@@ -32,20 +32,17 @@ jobs:
           curl https://cli-assets.heroku.com/install.sh | sh
           heroku --version
 
-      - name: Check if Heroku API Key is available
-        run: echo "HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }}" | head -c 10  # print part of the key for verification
-
-      - name: Clear Heroku Auth
-        run: heroku auth:logout || true  # Clear any existing session
-
-      - name: Authenticate to Heroku (Using API Key)
+      - name: Authenticate to Heroku (Set API Key as Environment Variable)
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
           echo "Authenticating with Heroku..."
-          echo ${{ secrets.HEROKU_API_KEY }} | heroku auth:token
           heroku whoami
 
       - name: List Heroku Apps
-        run: heroku apps  # Check if your Heroku app is visible
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku apps
 
       - name: Add Heroku remote
         run: git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
